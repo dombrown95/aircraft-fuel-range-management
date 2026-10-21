@@ -18,13 +18,7 @@
     <ClCompile Include="aircraft-fuel-range-management.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AFRM\FuelCalculations.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AFRM\FuelStatus.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AFRM\ScenarioLoader.cpp">
+    <ClCompile Include="AFRM\ScenarioProcessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -39,6 +33,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AFRM\ScenarioLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AFRM\ScenarioProcessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
