@@ -139,9 +139,6 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AFRM\FuelCalculations.cpp" />
-    <ClCompile Include="AFRM\FuelStatus.cpp" />
-    <ClCompile Include="AFRM\ScenarioLoader.cpp" />
     <ClCompile Include="aircraft-fuel-range-management.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +151,11 @@
     <ClInclude Include="AFRM\FuelCalculations.h" />
     <ClInclude Include="AFRM\FuelStatus.h" />
     <ClInclude Include="AFRM\ScenarioLoader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="AFRM.Core\AFRM.Core.vcxproj">
+      <Project>{d4a96d90-794c-48a4-8d9f-a1ce64c4163e}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

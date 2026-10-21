@@ -18,15 +18,6 @@
     <ClCompile Include="aircraft-fuel-range-management.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AFRM\FuelCalculations.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AFRM\FuelStatus.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AFRM\ScenarioLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
