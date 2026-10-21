@@ -161,6 +161,7 @@
     <ClCompile Include="..\AFRM\FuelCalculations.cpp" />
     <ClCompile Include="..\AFRM\FuelStatus.cpp" />
     <ClCompile Include="..\AFRM\ScenarioLoader.cpp" />
+    <ClCompile Include="..\AFRM\ScenarioProcessor.cpp" />
     <ClCompile Include="AFRM.Core.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

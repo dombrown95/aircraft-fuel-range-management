@@ -115,6 +115,7 @@
     <ClCompile Include="FuelCalculationsTests.cpp" />
     <ClCompile Include="FuelStatusTests.cpp" />
     <ClCompile Include="ScenarioLoaderTests.cpp" />
+    <ClCompile Include="ScenarioProcessorTests.cpp" />
     <ClCompile Include="TestMain.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
