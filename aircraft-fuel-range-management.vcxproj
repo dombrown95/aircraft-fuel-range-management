@@ -141,14 +141,19 @@
   <ItemGroup>
     <ClCompile Include="AFRM\FuelCalculations.cpp" />
     <ClCompile Include="AFRM\FuelStatus.cpp" />
+    <ClCompile Include="AFRM\ScenarioLoader.cpp" />
     <ClCompile Include="aircraft-fuel-range-management.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
+    <CopyFileToFolders Include="scenarios.csv">
+      <FileType>Document</FileType>
+    </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AFRM\FuelCalculations.h" />
     <ClInclude Include="AFRM\FuelStatus.h" />
+    <ClInclude Include="AFRM\ScenarioLoader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

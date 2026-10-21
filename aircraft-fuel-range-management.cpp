@@ -1,32 +1,64 @@
+
 #include <iostream>
+#include <exception>
+#include <cmath>
+
 #include "AFRM/FuelCalculations.h"
 #include "AFRM/FuelStatus.h"
+#include "AFRM/ScenarioLoader.h"
 
 int main()
 {
-    double availableFuel = 900.0;
-    double consumptionRate = 500.0;
-    double groundSpeed = 200.0;
-    double distance = 400.0;
-    double reserveFuel = 300.0;
+    try
+    {
+        // Loads the selected scenario from CSV
+        AFRM::Scenario scenario = AFRM::loadScenario(
+            "scenarios.csv", "SCN-005");
 
-    // Calculations for fuel requirements and range
-    double flightTime = AFRM::calculateFlightTime(distance, groundSpeed);
-    double journeyFuel = AFRM::calculateJourneyFuel(flightTime, consumptionRate);
-    double fuelBalance = AFRM::calculateFuelBalance(availableFuel, journeyFuel);
-    double maximumRange = AFRM::calculateMaximumRange(
-        availableFuel, consumptionRate, groundSpeed);
+        // Calculates the fuel requirements and range
+        double flightTime = AFRM::calculateFlightTime(
+            scenario.distance, scenario.groundSpeed);
 
-    // Determines the fuel status
-    AFRM::FuelStatus status = AFRM::determineFuelStatus(
-        fuelBalance, reserveFuel);
+        double journeyFuel = AFRM::calculateJourneyFuel(
+            flightTime, scenario.consumptionRate);
 
-    // Displays the results
-    std::cout << "Flight time: " << flightTime << " hours\n";
-    std::cout << "Journey fuel: " << journeyFuel << " kg\n";
-    std::cout << "Fuel balance: " << fuelBalance << " kg\n";
-    std::cout << "Maximum range: " << maximumRange << " NM\n";
-    std::cout << "Fuel status: " << AFRM::fuelStatusToString(status) << "\n";
+        double fuelBalance = AFRM::calculateFuelBalance(
+            scenario.availableFuel, journeyFuel);
 
-    return 0;
+        double maximumRange = AFRM::calculateMaximumRange(
+            scenario.availableFuel,
+            scenario.consumptionRate,
+            scenario.groundSpeed);
+
+        // Rejects any non-finite calculation results
+        if (!std::isfinite(flightTime) ||
+            !std::isfinite(journeyFuel) ||
+            !std::isfinite(fuelBalance) ||
+            !std::isfinite(maximumRange))
+        {
+            throw std::runtime_error(
+                "Calculation produced a non-finite result");
+        }
+
+        // Determines the fuel status
+        AFRM::FuelStatus status = AFRM::determineFuelStatus(
+            fuelBalance, scenario.reserveFuel);
+
+        // Displays the results
+        std::cout << "Scenario: " << scenario.id << "\n";
+        std::cout << "Flight time: " << flightTime << " hours\n";
+        std::cout << "Journey fuel: " << journeyFuel << " kg\n";
+        std::cout << "Fuel balance: " << fuelBalance << " kg\n";
+        std::cout << "Maximum range (including reserve): "
+            << maximumRange << " NM\n";
+        std::cout << "Fuel status: "
+            << AFRM::fuelStatusToString(status) << "\n";
+
+        return 0;
+    }
+    catch (const std::exception& error)
+    {
+        std::cerr << "Error: " << error.what() << "\n";
+        return 1;
+    }
 }
