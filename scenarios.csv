@@ -1,0 +1,6 @@
+scenario_id,available_fuel,consumption_rate,ground_speed,distance,reserve_fuel
+SCN-001,1500,500,200,400,300
+SCN-002,1200,500,200,400,300
+SCN-003,900,500,200,400,300
+SCN-004,0,500,200,400,300
+SCN-005,1500,500,0,400,300
