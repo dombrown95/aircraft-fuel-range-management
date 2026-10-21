@@ -1,0 +1,9 @@
+# Visual Studio local settings
+.vs/
+*.user
+
+# Generated build folders
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
