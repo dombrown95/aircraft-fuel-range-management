@@ -7,7 +7,7 @@ The Aircraft Fuel Range Management (AFRM) prototype calculates the fuel status o
 
 | ID | Requirement |
 |---|---|
-| AFRM-001 | The prototype shall load a selected CSV scenario containing available fuel, consumption rate, ground speed, distance and reserve fuel. |
+| AFRM-001 | The prototype shall load a scenario selected by its ID from a CSV file containing available fuel, consumption rate, ground speed, distance and reserve fuel. |
 | AFRM-002 | The prototype shall reject missing, non-numeric, non-finite or out-of-range inputs, using the Inputs and Units table. |
 | AFRM-003 | The prototype shall identify the cause and end without displaying calculated results or fuel status if a file, scenario or input error occurs. |
 | AFRM-004 | The prototype shall calculate flight time as distance divided by ground speed. |
@@ -15,8 +15,8 @@ The Aircraft Fuel Range Management (AFRM) prototype calculates the fuel status o
 | AFRM-006 | The prototype shall calculate fuel balance as available fuel minus journey fuel, identifying a negative result as a fuel deficit. |
 | AFRM-007 | The prototype shall calculate theoretical maximum range as available fuel divided by consumption rate, multiplied by ground speed. |
 | AFRM-008 | The prototype shall assign fuel status according to the Fuel Status Rules table. |
-| AFRM-009 | The prototype shall display the scenario ID, inputs, calculated results and fuel status. Numerical values shall include units and two decimal places. Maximum range shall be labelled as including reserve fuel. |
-| AFRM-010 | The prototype shall use unrounded values for calculations and comparisons. Non-finite calculation results shall produce an error and end processing without displaying results or fuel status. |
+| AFRM-009 | The prototype shall display the scenario ID, inputs, calculated results and fuel status. Fuel, distance, speed and time values shall include units and two decimal places. Maximum range shall be labelled as including reserve fuel. |
+| AFRM-010 | The prototype shall use unrounded values for calculations and comparisons. If a calculation produces a non-finite result, the prototype shall report an error and end without displaying calculated results or fuel status. |
 
 ## Inputs and Units
 

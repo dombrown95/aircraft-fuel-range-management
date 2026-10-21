@@ -139,10 +139,16 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AFRM\FuelCalculations.cpp" />
+    <ClCompile Include="AFRM\FuelStatus.cpp" />
     <ClCompile Include="aircraft-fuel-range-management.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AFRM\FuelCalculations.h" />
+    <ClInclude Include="AFRM\FuelStatus.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
