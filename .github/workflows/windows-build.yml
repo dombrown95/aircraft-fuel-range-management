@@ -22,11 +22,14 @@ jobs:
       - name: Set up vcpkg
         uses: lukka/run-vcpkg@v11
 
+      - name: Integrate vcpkg with MSBuild
+        run: vcpkg integrate install
+
       - name: Install dependencies
         run: vcpkg install --triplet x64-windows
 
       - name: Build AFRM
-        run: msbuild aircraft-fuel-range-management.slnx /m /p:Configuration=Debug /p:Platform=x64 /p:VcpkgEnableManifest=true
+        run: msbuild aircraft-fuel-range-management.slnx /m /p:Configuration=Debug /p:Platform=x64 /p:VcpkgEnabled=true /p:VcpkgEnableManifest=true
 
       - name: Run Google Tests
         shell: pwsh
