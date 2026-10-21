@@ -3,5 +3,10 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path="AFRM.runsettings" />
+    <File Path="GoogleTest.runsettings" />
+  </Folder>
+  <Project Path="AFRM.Tests/AFRM.Tests.vcxproj" Id="af93d97a-e981-41bc-bb9e-ab38b8ca1ce2" />
   <Project Path="aircraft-fuel-range-management.vcxproj" Id="dc3a4ad0-dcaf-4656-b0aa-7b8d0d87c922" />
 </Solution>

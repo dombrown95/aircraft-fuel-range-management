@@ -1,9 +1,22 @@
 # Visual Studio local settings
 .vs/
+.vs_backup/
 *.user
+*.suo
 
 # Generated build folders
 [Dd]ebug/
 [Rr]elease/
 x64/
 x86/
+*.obj
+*.pdb
+*.exe
+
+# vcpkg generated dependencies
+vcpkg_installed/
+
+# Local build diagnostics
+build-diagnostic.log
+*.log
+discovery-errors.txt
