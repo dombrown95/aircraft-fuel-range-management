@@ -4,7 +4,6 @@
     <Platform Name="x86" />
   </Configurations>
   <Folder Name="/Solution Items/">
-    <File Path="AFRM.runsettings" />
     <File Path="GoogleTest.runsettings" />
   </Folder>
   <Project Path="AFRM.Tests/AFRM.Tests.vcxproj" Id="af93d97a-e981-41bc-bb9e-ab38b8ca1ce2" />
