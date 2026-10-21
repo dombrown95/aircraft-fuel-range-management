@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="aircraft-fuel-range-management.vcxproj" />
+  <Project Path="aircraft-fuel-range-management.vcxproj" Id="dc3a4ad0-dcaf-4656-b0aa-7b8d0d87c922" />
 </Solution>
