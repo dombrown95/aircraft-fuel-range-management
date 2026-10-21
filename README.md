@@ -84,4 +84,5 @@ GitHub Actions automatically builds the project using MSBuild on a Windows runne
 The workflow is defined in the .github/workflows/windows-build.yml file.
 
 ## Testing
-How to run tests and what they cover.
+
+Running tests: The project uses Google Test with Visual Studio's Test Adapter for Google Test. If tests are not discovered automatically, set the discovery regex under Tools → Options → Test Adapter for Google Test → General to .*AFRM\.Tests\.exe$.
