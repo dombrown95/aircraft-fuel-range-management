@@ -1,4 +1,3 @@
-
 #include "ScenarioLoader.h"
 
 #include <cmath>
