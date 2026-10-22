@@ -2,12 +2,36 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include <vector>
 
 #include "AFRM/ScenarioLoader.h"
 #include "AFRM/ScenarioProcessor.h"
 
 int main()
 {
+
+    try {
+        std::vector<std::string> scenarioIds =
+            AFRM::listScenarioIds("scenarios.csv");
+
+        std::cout << "\nAvailable scenarios:\n";
+
+        if (scenarioIds.empty()) {
+            std::cout << "  No scenarios available.\n";
+        }
+        else {
+            for (const auto& id : scenarioIds) {
+                std::cout << "  " << id << '\n';
+            }
+        }
+
+        std::cout << '\n';
+    }
+    catch (const std::exception& error) {
+        std::cerr << "Error: " << error.what() << '\n';
+        return 1;
+    }
+
     while (true)
     {
         std::string scenarioId;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 namespace AFRM
 {
@@ -18,4 +19,16 @@ namespace AFRM
         const std::string& filePath,
         const std::string& scenarioId
     );
+
+    Scenario loadScenario(
+        const std::string& filePath, 
+        const std::string& scenarioId
+    );
+
+    std::vector<std::string> 
+
+        listScenarioIds(
+            const std::string& filePath
+        );
+
 }

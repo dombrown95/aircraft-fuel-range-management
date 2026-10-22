@@ -171,4 +171,45 @@ namespace AFRM
         throw std::runtime_error(
             "Scenario not found: " + scenarioId);
     }
+
+
+    std::vector<std::string> listScenarioIds(const std::string& filePath)
+    {
+        std::ifstream file(filePath);
+
+        if (!file.is_open()) {
+            throw std::runtime_error("Unable to open scenario file: " + filePath);
+        }
+
+        std::string line;
+
+        if (!std::getline(file, line)) {
+            throw std::runtime_error("Scenario file is empty");
+        }
+
+        if (line != "scenario_id,available_fuel,consumption_rate,ground_speed,distance,reserve_fuel") {
+            throw std::runtime_error("Invalid CSV header");
+        }
+
+        std::vector<std::string> scenarioIds;
+
+        while (std::getline(file, line)) {
+            if (line.empty()) {
+                continue;
+            }
+
+            std::vector<std::string> fields = splitCsvLine(line);
+
+            if (!fields.empty() && !fields[0].empty()) {
+                scenarioIds.push_back(fields[0]);
+            }
+        }
+
+        if (file.bad()) {
+            throw std::runtime_error("Error reading scenario file");
+        }
+
+        return scenarioIds;
+    }
+
 }
