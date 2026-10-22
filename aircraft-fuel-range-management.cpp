@@ -66,7 +66,7 @@ int main()
             AFRM::Scenario scenario =
                 AFRM::loadScenario(filePath, scenarioId);
 
-            AFRM::processScenario(scenario, std::cout);
+            AFRM::processScenario(scenario, std::cout, true);
 
             std::cout << '\n';
         }
