@@ -68,7 +68,26 @@ namespace AFRM
         output << "Maximum range (including reserve fuel): "
             << maximumRange << " NM\n";
 
+        std::string colour;
+
+        switch (status)
+        {
+        case FuelStatus::SUFFICIENT:
+            colour = "\033[32m";
+            break;
+
+        case FuelStatus::RESERVE_SHORTFALL:
+            colour = "\033[33m";
+            break;
+
+        case FuelStatus::INSUFFICIENT:
+            colour = "\033[31m";
+            break;
+        }
+
         output << "\nFuel status: "
-            << fuelStatusToString(status) << "\n";
+            << colour
+            << fuelStatusToString(status)
+            << "\033[0m\n";
     }
 }

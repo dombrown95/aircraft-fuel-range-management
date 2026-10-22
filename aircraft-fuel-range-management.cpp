@@ -1,28 +1,40 @@
 
 #include <iostream>
-#include <stdexcept>
+#include <iomanip>
 #include <string>
 #include <vector>
+#include <exception>
 
-#include "AFRM/ScenarioLoader.h"
-#include "AFRM/ScenarioProcessor.h"
+#include "ScenarioLoader.h"
+#include "ScenarioProcessor.h"
 
 int main()
 {
+    const std::string filePath = "scenarios.csv";
+
+    std::cout << "Aircraft Fuel Range Management (AFRM)\n";
+    std::cout << "-------------------------------------\n";
 
     try {
-        std::vector<std::string> scenarioIds =
-            AFRM::listScenarioIds("scenarios.csv");
+        std::vector<AFRM::ScenarioInfo> scenarios =
+            AFRM::listScenarios(filePath);
 
-        std::cout << "\nAvailable scenarios:\n";
+        std::cout << "\nAvailable scenarios:\n\n";
 
-        if (scenarioIds.empty()) {
-            std::cout << "  No scenarios available.\n";
+        std::cout << std::left
+            << std::setw(10) << "ID"
+            << "Description\n";
+
+        std::cout << std::string(40, '-') << '\n';
+
+        for (const auto& scenario : scenarios) {
+            std::cout << std::left
+                << std::setw(10) << scenario.id
+                << scenario.description << '\n';
         }
-        else {
-            for (const auto& id : scenarioIds) {
-                std::cout << "  " << id << '\n';
-            }
+
+        if (scenarios.empty()) {
+            std::cout << "No scenarios available.\n";
         }
 
         std::cout << '\n';
@@ -32,42 +44,37 @@ int main()
         return 1;
     }
 
-    while (true)
-    {
+    while (true) {
         std::string scenarioId;
 
-        std::cout << "\nEnter scenario ID (or Q to quit): ";
+        std::cout << "Enter a scenario ID (Q to quit): ";
 
-        if (!std::getline(std::cin, scenarioId))
-        {
+        if (!std::getline(std::cin, scenarioId)) {
             break;
         }
 
-        if (scenarioId == "Q" || scenarioId == "q")
-        {
+        if (scenarioId == "Q" || scenarioId == "q") {
+            std::cout << "Exiting AFRM.\n";
             break;
         }
 
-        try
-        {
-            if (scenarioId.empty())
-            {
-                throw std::runtime_error("No scenario ID entered");
+        try {
+            if (scenarioId.empty()) {
+                throw std::runtime_error("Scenario ID cannot be empty");
             }
 
-            AFRM::Scenario scenario = AFRM::loadScenario(
-                "scenarios.csv", scenarioId);
+            AFRM::Scenario scenario =
+                AFRM::loadScenario(filePath, scenarioId);
 
             AFRM::processScenario(scenario, std::cout);
+
+            std::cout << '\n';
         }
-        catch (const std::exception& error)
-        {
-            std::cerr << "\nError: " << error.what() << "\n";
+        catch (const std::exception& error) {
+            std::cerr << "Error: " << error.what() << '\n';
             return 1;
         }
     }
-
-    std::cout << "\nExiting AFRM application.\n";
 
     return 0;
 }
