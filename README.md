@@ -85,4 +85,60 @@ The workflow is defined in the .github/workflows/windows-build.yml file.
 
 ## Testing
 
-Running tests: The project uses Google Test with Visual Studio's Test Adapter for Google Test. If tests are not discovered automatically, set the discovery regex under Tools → Options → Test Adapter for Google Test → General to .*AFRM\.Tests\.exe$.
+### Running tests: 
+The project uses Google Test with Visual Studio's Test Adapter for Google Test. If tests are not discovered automatically, set the discovery regex under Tools → Options → Test Adapter for Google Test → General to .*AFRM\.Tests\.exe$.
+
+### Requirements Verification Traceability Matrix
+
+The following matrix links each AFRM software requirement to its corresponding automated Google Tests. All 46 tests passed during local verification.
+
+| Requirement | Test Name | Result |
+|---|---|---|
+| **AFRM-001** | `ScenarioLoaderTest.AFRM001_LoadsValidScenario` | Pass |
+| | `ScenarioLoaderTest.AFRM001_SelectsCorrectScenario` | Pass |
+| **AFRM-002** | `ScenarioLoaderTest.AFRM002_AcceptsZeroWherePermitted` | Pass |
+| | `ScenarioLoaderTest.AFRM002_RejectsNegativeAvailableFuel` | Pass |
+| | `ScenarioLoaderTest.AFRM002_RejectsZeroConsumptionRate` | Pass |
+| | `ScenarioLoaderTest.AFRM002_RejectsNegativeConsumptionRate` | Pass |
+| | `ScenarioLoaderTest.AFRM002_RejectsZeroGroundSpeed` | Pass |
+| | `ScenarioLoaderTest.AFRM002_RejectsNegativeGroundSpeed` | Pass |
+| | `ScenarioLoaderTest.AFRM002_RejectsNegativeDistance` | Pass |
+| | `ScenarioLoaderTest.AFRM002_RejectsNegativeReserveFuel` | Pass |
+| | `ScenarioLoaderTest.AFRM002_RejectsMissingValue` | Pass |
+| | `ScenarioLoaderTest.AFRM002_RejectsMissingFinalValue` | Pass |
+| | `ScenarioLoaderTest.AFRM002_RejectsNonNumericValue` | Pass |
+| | `ScenarioLoaderTest.AFRM002_RejectsPartiallyNumericValue` | Pass |
+| | `ScenarioLoaderTest.AFRM002_RejectsNaN` | Pass |
+| | `ScenarioLoaderTest.AFRM002_RejectsInfinity` | Pass |
+| **AFRM-003** | `ScenarioLoaderTest.AFRM003_RejectsMissingFile` | Pass |
+| | `ScenarioLoaderTest.AFRM003_RejectsEmptyFile` | Pass |
+| | `ScenarioLoaderTest.AFRM003_RejectsInvalidHeader` | Pass |
+| | `ScenarioLoaderTest.AFRM003_RejectsUnknownScenario` | Pass |
+| | `ScenarioLoaderTest.AFRM003_RejectsIncorrectFieldCount` | Pass |
+| **AFRM-004** | `AFRM004.CalculatesFlightTime` | Pass |
+| | `AFRM004.ZeroDistanceProducesZeroTime` | Pass |
+| | `AFRM004.CalculatesFractionalFlightTime` | Pass |
+| **AFRM-005** | `AFRM005.CalculatesJourneyFuel` | Pass |
+| | `AFRM005.ZeroFlightTimeProducesZeroFuel` | Pass |
+| **AFRM-006** | `AFRM006.CalculatesPositiveFuelBalance` | Pass |
+| | `AFRM006.CalculatesNegativeFuelBalance` | Pass |
+| | `AFRM006.CalculatesZeroFuelBalance` | Pass |
+| **AFRM-007** | `AFRM007.CalculatesMaximumRange` | Pass |
+| | `AFRM007.ZeroAvailableFuelProducesZeroRange` | Pass |
+| | `AFRM007.CalculatesFractionalMaximumRange` | Pass |
+| **AFRM-008** | `AFRM008.SufficientFuelAboveReserve` | Pass |
+| | `AFRM008.SufficientFuelAtReserveBoundary` | Pass |
+| | `AFRM008.ReserveShortfallBelowReserveBoundary` | Pass |
+| | `AFRM008.ReserveShortfallWithZeroBalance` | Pass |
+| | `AFRM008.InsufficientFuelBelowZero` | Pass |
+| | `AFRM008.ZeroReserveAndZeroBalance` | Pass |
+| | `AFRM008.ZeroReserveWithPositiveBalance` | Pass |
+| **AFRM-009** | `AFRM009.DisplaysScenarioIdAndInputs` | Pass |
+| | `AFRM009.DisplaysCalculatedResults` | Pass |
+| | `AFRM009.DisplaysCorrectFuelStatus` | Pass |
+| | `AFRM009.FormatsFractionalValuesToTwoDecimals` | Pass |
+| **AFRM-010** | `AFRM010.UsesUnroundedValuesForCalculations` | Pass |
+| | `AFRM010.RejectsNonFiniteCalculationResult` | Pass |
+| | `AFRM010.UsesUnroundedBalanceForFuelStatus` | Pass |
+
+**Verification summary:** 46 automated tests passed across 10 software requirements.
