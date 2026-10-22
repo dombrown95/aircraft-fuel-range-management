@@ -1,3 +1,4 @@
+
 #include "ScenarioLoader.h"
 
 #include <cmath>
@@ -6,11 +7,21 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 namespace AFRM
 {
     namespace
     {
+        const std::vector<std::string> expectedHeader = {
+            "scenario_id",
+            "available_fuel",
+            "consumption_rate",
+            "ground_speed",
+            "distance",
+            "reserve_fuel"
+        };
+
         std::vector<std::string> splitCsvLine(
             const std::string& line)
         {
@@ -30,6 +41,22 @@ namespace AFRM
             }
 
             return fields;
+        }
+
+        void validateCsvHeader(std::ifstream& file)
+        {
+            std::string line;
+
+            if (!std::getline(file, line))
+            {
+                throw std::runtime_error("CSV file is empty");
+            }
+
+            if (splitCsvLine(line) != expectedHeader)
+            {
+                throw std::runtime_error(
+                    "CSV file has an invalid header");
+            }
         }
 
         double parseInput(
@@ -96,28 +123,10 @@ namespace AFRM
                 "Unable to open CSV file: " + filePath);
         }
 
+        // Reads and validates the CSV header.
+        validateCsvHeader(file);
+
         std::string line;
-
-        // Reads and checks the header.
-        if (!std::getline(file, line))
-        {
-            throw std::runtime_error("CSV file is empty");
-        }
-
-        const std::vector<std::string> expectedHeader = {
-            "scenario_id",
-            "available_fuel",
-            "consumption_rate",
-            "ground_speed",
-            "distance",
-            "reserve_fuel"
-        };
-
-        if (splitCsvLine(line) != expectedHeader)
-        {
-            throw std::runtime_error(
-                "CSV file has an invalid header");
-        }
 
         while (std::getline(file, line))
         {
@@ -170,5 +179,73 @@ namespace AFRM
 
         throw std::runtime_error(
             "Scenario not found: " + scenarioId);
+    }
+
+    std::vector<ScenarioInfo> listScenarios(
+        const std::string& filePath)
+    {
+        std::ifstream file(filePath);
+
+        if (!file.is_open())
+        {
+            throw std::runtime_error(
+                "Unable to open CSV file: " + filePath);
+        }
+
+        // Reads and validates the CSV header.
+        validateCsvHeader(file);
+
+        std::string line;
+
+        // Descriptions used in the scenario selection table.
+        const std::unordered_map<std::string, std::string> descriptions = {
+            { "SCN-001", "Standard flight" },
+            { "SCN-002", "Long-distance flight" },
+            { "SCN-003", "High fuel consumption" },
+            { "SCN-004", "Low fuel supply" },
+            { "SCN-005", "Minimum reserve" },
+            { "SCN-006", "Below reserve" },
+            { "SCN-007", "Exact fuel requirement" },
+            { "SCN-008", "No available fuel" },
+            { "SCN-009", "Zero-distance journey" },
+            { "SCN-010", "Fractional calculations" }
+        };
+
+        std::vector<ScenarioInfo> scenarios;
+
+        while (std::getline(file, line))
+        {
+            if (line.empty())
+            {
+                continue;
+            }
+
+            std::vector<std::string> fields =
+                splitCsvLine(line);
+
+            if (fields.empty() || fields[0].empty())
+            {
+                continue;
+            }
+
+            const std::string& id = fields[0];
+
+            auto description = descriptions.find(id);
+
+            scenarios.push_back({
+                id,
+                description != descriptions.end()
+                    ? description->second
+                    : "Custom scenario"
+                });
+        }
+
+        if (file.bad())
+        {
+            throw std::runtime_error(
+                "Error while reading CSV file");
+        }
+
+        return scenarios;
     }
 }

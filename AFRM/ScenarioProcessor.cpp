@@ -1,3 +1,4 @@
+
 #include "ScenarioProcessor.h"
 
 #include "FuelCalculations.h"
@@ -6,12 +7,14 @@
 #include <cmath>
 #include <iomanip>
 #include <stdexcept>
+#include <string>
 
 namespace AFRM
 {
     void processScenario(
         const Scenario& scenario,
-        std::ostream& output)
+        std::ostream& output,
+        bool useColour)
     {
         // Calculates the results using unrounded values
         double flightTime = calculateFlightTime(
@@ -68,7 +71,41 @@ namespace AFRM
         output << "Maximum range (including reserve fuel): "
             << maximumRange << " NM\n";
 
-        output << "\nFuel status: "
-            << fuelStatusToString(status) << "\n";
+        // Applies colour to output fuel statuses when requested
+        std::string colour;
+
+        if (useColour)
+        {
+            switch (status)
+            {
+            case FuelStatus::SUFFICIENT:
+                colour = "\033[32m";
+                break;
+
+            case FuelStatus::RESERVE_SHORTFALL:
+                colour = "\033[33m";
+                break;
+
+            case FuelStatus::INSUFFICIENT:
+                colour = "\033[31m";
+                break;
+            }
+        }
+
+        output << "\nFuel status: ";
+
+        if (useColour)
+        {
+            output << colour;
+        }
+
+        output << fuelStatusToString(status);
+
+        if (useColour)
+        {
+            output << "\033[0m";
+        }
+
+        output << '\n';
     }
 }
