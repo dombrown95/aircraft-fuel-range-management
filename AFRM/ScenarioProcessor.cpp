@@ -1,11 +1,11 @@
-
 #include "ScenarioProcessor.h"
 
 #include "FuelCalculations.h"
 #include "FuelStatus.h"
 
 #include <cmath>
-#include <iomanip>
+#include <format>
+#include <ostream>
 #include <stdexcept>
 #include <string>
 
@@ -44,32 +44,48 @@ namespace AFRM
         FuelStatus status = determineFuelStatus(
             fuelBalance, scenario.reserveFuel);
 
-        // Formats the displayed values only
-        output << std::fixed << std::setprecision(2);
-
+        // Formats the displayed values using C++20 std::format
         output << "\nScenario: " << scenario.id << "\n\n";
 
         output << "Inputs:\n";
-        output << "Available fuel: "
-            << scenario.availableFuel << " kg\n";
-        output << "Consumption rate: "
-            << scenario.consumptionRate << " kg/hour\n";
-        output << "Ground speed: "
-            << scenario.groundSpeed << " knots\n";
-        output << "Journey distance: "
-            << scenario.distance << " NM\n";
-        output << "Reserve fuel: "
-            << scenario.reserveFuel << " kg\n";
+
+        output << std::format(
+            "Available fuel: {:.2f} kg\n",
+            scenario.availableFuel);
+
+        output << std::format(
+            "Consumption rate: {:.2f} kg/hour\n",
+            scenario.consumptionRate);
+
+        output << std::format(
+            "Ground speed: {:.2f} knots\n",
+            scenario.groundSpeed);
+
+        output << std::format(
+            "Journey distance: {:.2f} NM\n",
+            scenario.distance);
+
+        output << std::format(
+            "Reserve fuel: {:.2f} kg\n",
+            scenario.reserveFuel);
 
         output << "\nCalculated results:\n";
-        output << "Flight time: "
-            << flightTime << " hours\n";
-        output << "Journey fuel: "
-            << journeyFuel << " kg\n";
-        output << "Fuel balance: "
-            << fuelBalance << " kg\n";
-        output << "Maximum range (including reserve fuel): "
-            << maximumRange << " NM\n";
+
+        output << std::format(
+            "Flight time: {:.2f} hours\n",
+            flightTime);
+
+        output << std::format(
+            "Journey fuel: {:.2f} kg\n",
+            journeyFuel);
+
+        output << std::format(
+            "Fuel balance: {:.2f} kg\n",
+            fuelBalance);
+
+        output << std::format(
+            "Maximum range (including reserve fuel): {:.2f} NM\n",
+            maximumRange);
 
         // Applies colour to output fuel statuses when requested
         std::string colour;
