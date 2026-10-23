@@ -1,9 +1,9 @@
-
 #include <iostream>
-#include <iomanip>
 #include <string>
 #include <vector>
 #include <exception>
+#include <stdexcept>
+#include <format>
 
 #include "ScenarioLoader.h"
 #include "ScenarioProcessor.h"
@@ -21,16 +21,17 @@ int main()
 
         std::cout << "\nAvailable scenarios:\n\n";
 
-        std::cout << std::left
-            << std::setw(10) << "ID"
-            << "Description\n";
+        // Formats the scenario table using C++20 std::format
+        std::cout << std::format("{:<10}{}\n", "ID", "Description");
 
         std::cout << std::string(40, '-') << '\n';
 
         for (const auto& scenario : scenarios) {
-            std::cout << std::left
-                << std::setw(10) << scenario.id
-                << scenario.description << '\n';
+            std::cout << std::format(
+                "{:<10}{}\n",
+                scenario.id,
+                scenario.description
+            );
         }
 
         if (scenarios.empty()) {
