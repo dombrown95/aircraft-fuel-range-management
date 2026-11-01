@@ -69,7 +69,7 @@ The AFRM prototype uses the following assumptions to simplify the fuel and range
 Note: The prototype is intended for demonstration and testing purposes as part of a university assignment. It is not intended for real-world flight planning.
 
 ## Building and Running
-The prototype is developed using C++17 and Visual Studio 2022 with the MSVC v143 toolset.
+The prototype is developed using C++20 and Visual Studio 2022 with the MSVC v143 toolset.
 
 To build locally:
 
@@ -79,7 +79,7 @@ Select the Release and x64 configuration.
 
 Select Build > Build Solution.
 
-GitHub Actions automatically builds the project using MSBuild on a Windows runner when changes are pushed to main or a pull request targets main.
+GitHub Actions automatically builds the project using MSBuild on a Windows runner when a pull request targets main.
 
 The workflow is defined in the .github/workflows/windows-build.yml file.
 
