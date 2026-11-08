@@ -1,4 +1,3 @@
-
 #include <gtest/gtest.h>
 #include <algorithm>
 #include <cmath>
@@ -101,4 +100,62 @@ TEST(AFRM007, CalculatesFractionalMaximumRange)
     expectCalculationNear(actual, 562.5);
 }
 
-} // namespace AFRM::Tests
+// AFRM-012: Adjust consumption using aircraft profile factor
+
+TEST(AFRM012, CalculatesLightAircraftConsumption)
+{
+    double actual = AFRM::calculateAdjustedConsumption(900.0, 0.80);
+
+    expectCalculationNear(actual, 720.0);
+}
+
+TEST(AFRM012, CalculatesMediumAircraftConsumption)
+{
+    double actual = AFRM::calculateAdjustedConsumption(900.0, 1.00);
+
+    expectCalculationNear(actual, 900.0);
+}
+
+TEST(AFRM012, CalculatesHeavyAircraftConsumption)
+{
+    double actual = AFRM::calculateAdjustedConsumption(900.0, 1.20);
+
+    expectCalculationNear(actual, 1080.0);
+}
+
+
+// AFRM-013: Calculate range while preserving reserve fuel
+
+TEST(AFRM013, CalculatesReserveAwareRange)
+{
+    double actual = AFRM::calculateReserveAwareRange(
+        6500.0, 1000.0, 900.0, 450.0);
+
+    expectCalculationNear(actual, 2750.0);
+}
+
+TEST(AFRM013, ZeroReserveMatchesMaximumRange)
+{
+    double actual = AFRM::calculateReserveAwareRange(
+        5000.0, 0.0, 800.0, 400.0);
+
+    expectCalculationNear(actual, 2500.0);
+}
+
+TEST(AFRM013, ReserveEqualToAvailableFuelProducesZeroRange)
+{
+    double actual = AFRM::calculateReserveAwareRange(
+        1000.0, 1000.0, 800.0, 400.0);
+
+    expectCalculationNear(actual, 0.0);
+}
+
+TEST(AFRM013, ReserveExceedsAvailableFuelProducesZeroRange)
+{
+    double actual = AFRM::calculateReserveAwareRange(
+        500.0, 1000.0, 800.0, 400.0);
+
+    expectCalculationNear(actual, 0.0);
+}
+
+}

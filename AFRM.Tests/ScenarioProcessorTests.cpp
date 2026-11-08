@@ -102,9 +102,6 @@ namespace AFRM::Tests
 
         std::string text = output.str();
 
-        // Flight time is 0.5 hours.
-        // Journey fuel is 150 kg.
-        // Fuel balance is 850 kg.
         EXPECT_NE(text.find("Flight time: 0.50 hours"), std::string::npos);
         EXPECT_NE(text.find("Journey fuel: 150.00 kg"), std::string::npos);
         EXPECT_NE(text.find("Fuel balance: 850.00 kg"), std::string::npos);
@@ -153,4 +150,68 @@ namespace AFRM::Tests
         EXPECT_NE(text.find("Journey fuel: 33.33 kg"), std::string::npos);
         EXPECT_NE(text.find("Fuel status: RESERVE SHORTFALL"), std::string::npos);
     }
+
+
+    // AFRM-014: Display aircraft profile and adjusted results
+
+    TEST(AFRM014, DisplaysAircraftProfileAndAdjustedResults)
+    {
+        Scenario scenario{
+            "SCN-002", 6500.0, 900.0,
+            450.0, 2500.0, 1000.0
+        };
+
+        std::ostringstream output;
+
+        processScenario(
+            scenario, output, false, AircraftType::Heavy);
+
+        std::string text = output.str();
+
+        EXPECT_NE(
+            text.find("Aircraft profile: Heavy"),
+            std::string::npos);
+
+        EXPECT_NE(
+            text.find("Adjusted consumption: 1080.00 kg/hour"),
+            std::string::npos);
+
+        EXPECT_NE(
+            text.find("Journey fuel: 6000.00 kg"),
+            std::string::npos);
+
+        EXPECT_NE(
+            text.find("Reserve-aware range: 2291.67 NM"),
+            std::string::npos);
+
+        EXPECT_NE(
+            text.find("Fuel status: RESERVE SHORTFALL"),
+            std::string::npos);
+    }
+
+    TEST(AFRM014, AircraftProfileChangesFuelStatus)
+    {
+        Scenario scenario{
+            "SCN-002", 6500.0, 900.0,
+            450.0, 2500.0, 1000.0
+        };
+
+        std::ostringstream mediumOutput;
+        std::ostringstream heavyOutput;
+
+        processScenario(
+            scenario, mediumOutput, false, AircraftType::Medium);
+
+        processScenario(
+            scenario, heavyOutput, false, AircraftType::Heavy);
+
+        EXPECT_NE(
+            mediumOutput.str().find("Fuel status: SUFFICIENT"),
+            std::string::npos);
+
+        EXPECT_NE(
+            heavyOutput.str().find("Fuel status: RESERVE SHORTFALL"),
+            std::string::npos);
+    }
+
 }

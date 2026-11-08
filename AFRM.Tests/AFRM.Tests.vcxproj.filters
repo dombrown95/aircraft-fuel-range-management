@@ -19,6 +19,7 @@
     <ClCompile Include="ScenarioProcessorTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AircraftProfileTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

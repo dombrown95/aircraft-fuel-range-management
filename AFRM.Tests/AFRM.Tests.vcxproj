@@ -112,6 +112,7 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AircraftProfileTests.cpp" />
     <ClCompile Include="FuelCalculationsTests.cpp" />
     <ClCompile Include="FuelStatusTests.cpp" />
     <ClCompile Include="ScenarioLoaderTests.cpp" />
