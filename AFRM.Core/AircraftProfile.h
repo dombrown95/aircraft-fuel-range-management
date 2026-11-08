@@ -2,19 +2,22 @@
 
 #include <string>
 
-enum class AircraftType
+namespace AFRM
 {
-    Light,
-    Medium,
-    Heavy
-};
+    enum class AircraftType
+    {
+        Light,
+        Medium,
+        Heavy
+    };
 
-struct AircraftProfile
-{
-    AircraftType type;
-    std::string name;
-    double weightKg;
-    double consumptionFactor;
-};
+    struct AircraftProfile
+    {
+        AircraftType type;
+        std::string name;
+        double weightKg;
+        double consumptionFactor;
+    };
 
-AircraftProfile getAircraftProfile(AircraftType type);
+    AircraftProfile getAircraftProfile(AircraftType type);
+}
