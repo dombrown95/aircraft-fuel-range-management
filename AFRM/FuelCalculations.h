@@ -1,4 +1,3 @@
-
 #pragma once
 
 namespace AFRM
@@ -15,5 +14,15 @@ namespace AFRM
     // AFRM-007: Calculate theoretical maximum range in NM
     double calculateMaximumRange(double availableFuel,
         double consumptionRate,
+        double groundSpeed);
+
+    // AFRM-012: Adjust consumption using the aircraft profile factor
+    double calculateAdjustedConsumption(double baseConsumption,
+        double consumptionFactor);
+
+    // AFRM-013: Calculate range while maintaining reserve fuel
+    double calculateReserveAwareRange(double availableFuel,
+        double reserveFuel,
+        double adjustedConsumption,
         double groundSpeed);
 }

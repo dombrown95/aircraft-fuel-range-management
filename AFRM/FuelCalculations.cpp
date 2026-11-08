@@ -1,5 +1,6 @@
-
 #include "FuelCalculations.h"
+
+#include <algorithm>
 
 namespace AFRM
 {
@@ -23,5 +24,22 @@ namespace AFRM
         double groundSpeed)
     {
         return (availableFuel / consumptionRate) * groundSpeed;
+    }
+
+    double calculateAdjustedConsumption(double baseConsumption,
+        double consumptionFactor)
+    {
+        return baseConsumption * consumptionFactor;
+    }
+
+    double calculateReserveAwareRange(double availableFuel,
+        double reserveFuel,
+        double adjustedConsumption,
+        double groundSpeed)
+    {
+        const double usableFuel =
+            std::max(0.0, availableFuel - reserveFuel);
+
+        return (usableFuel / adjustedConsumption) * groundSpeed;
     }
 }

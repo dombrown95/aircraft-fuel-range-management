@@ -7,6 +7,7 @@
 
 #include "ScenarioLoader.h"
 #include "ScenarioProcessor.h"
+#include "AircraftProfile.h"
 
 int main()
 {
@@ -67,7 +68,41 @@ int main()
             AFRM::Scenario scenario =
                 AFRM::loadScenario(filePath, scenarioId);
 
-            AFRM::processScenario(scenario, std::cout, true);
+            // Allows the user to select an aircraft profile
+            std::cout << "\nAvailable aircraft profiles:\n";
+            std::cout << "1. Light  (0.80)\n";
+            std::cout << "2. Medium (1.00)\n";
+            std::cout << "3. Heavy  (1.20)\n\n";
+
+            std::cout << "Select an aircraft profile (1-3): ";
+
+            std::string profileChoice;
+
+            if (!std::getline(std::cin, profileChoice)) {
+                break;
+            }
+
+            AFRM::AircraftType aircraftType;
+
+            if (profileChoice == "1") {
+                aircraftType = AFRM::AircraftType::Light;
+            }
+            else if (profileChoice == "2") {
+                aircraftType = AFRM::AircraftType::Medium;
+            }
+            else if (profileChoice == "3") {
+                aircraftType = AFRM::AircraftType::Heavy;
+            }
+            else {
+                throw std::invalid_argument(
+                    "Invalid aircraft profile selection");
+            }
+
+            AFRM::processScenario(
+                scenario,
+                std::cout,
+                true,
+                aircraftType);
 
             std::cout << '\n';
         }
