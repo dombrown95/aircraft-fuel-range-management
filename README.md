@@ -17,6 +17,20 @@ The Aircraft Fuel Range Management (AFRM) prototype calculates the fuel status o
 | AFRM-008 | The prototype shall assign fuel status according to the Fuel Status Rules table. |
 | AFRM-009 | The prototype shall display the scenario ID, inputs, calculated results and fuel status. Fuel, distance, speed and time values shall include units and two decimal places. Maximum range shall be labelled as including reserve fuel. |
 | AFRM-010 | The prototype shall use unrounded values for calculations and comparisons. If a calculation produces a non-finite result, the prototype shall report an error and end without displaying calculated results or fuel status. |
+| AFRM-011 | The application shall allow selection of one of three predefined aircraft profiles and reject invalid selections. |
+| AFRM-012 | The application shall calculate adjusted fuel consumption using the selected profile's factor. |
+| AFRM-013 | The application shall calculate reserve-aware range using available fuel minus reserve fuel, with a minimum result of 0 NM. |
+| AFRM-014 | The application shall display the selected aircraft profile, adjusted consumption rate and reserve-aware range. |
+
+## Aircraft Profiles (V1.1.0)
+
+| Profile | Representative Weight (kg) | Consumption Factor |
+|---------|---------------------------:|-------------------:|
+| Light   | 20,000                     | 0.80               |
+| Medium  | 40,000                     | 1.00               |
+| Heavy   | 60,000                     | 1.20               |
+
+Note: The weights and consumption factors are illustrative values used for testing and are not based on actual aircraft performance data.
 
 ## Inputs and Units
 
