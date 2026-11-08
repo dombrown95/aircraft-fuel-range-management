@@ -143,6 +143,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AFRM.Core\AircraftProfile.cpp" />
     <ClCompile Include="AFRM\ScenarioProcessor.cpp" />
     <ClCompile Include="aircraft-fuel-range-management.cpp" />
   </ItemGroup>
@@ -153,6 +154,7 @@
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AFRM.Core\AircraftProfile.h" />
     <ClInclude Include="AFRM\FuelCalculations.h" />
     <ClInclude Include="AFRM\FuelStatus.h" />
     <ClInclude Include="AFRM\ScenarioLoader.h" />

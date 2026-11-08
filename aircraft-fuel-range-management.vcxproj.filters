@@ -21,6 +21,9 @@
     <ClCompile Include="AFRM\ScenarioProcessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AFRM.Core\AircraftProfile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AFRM\ScenarioProcessor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AFRM.Core\AircraftProfile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
